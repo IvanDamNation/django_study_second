@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Sum
 
 
 class Author(models.Model):
@@ -7,7 +8,16 @@ class Author(models.Model):
     ratingAuthor = models.SmallIntegerField(default=0)
 
     def update_rating(self):
-        pass
+        post_rat = self.post_set.aggregate(postRating=Sum('rating'))
+        p_rat = 0
+        p_rat += post_rat.get('postRating')
+
+        comment_rat = self.authorUser.comment_set.aggregate(commentRating=Sum('rating'))
+        c_rat = 0
+        c_rat += comment_rat.get('çommentRating')
+
+        self.ratingAuthor = p_rat * 3 + c_rat
+        self.save()
 
 
 class Category(models.Model):
@@ -17,7 +27,7 @@ class Category(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
-    News = 'NW'
+    NEWS = 'NW'
     ARTICLE = 'AR'
     CATEGORY_CHOICES = (
         (NEWS, 'News'),
