@@ -1,11 +1,10 @@
 # django_study_second
 
-(PROJECT IS NOT FINISHED!)
 My second practice project in Django and HTML
 
 This is simple project on Django.
 
-For superuser sign in (on /admin/): login: IDN_admin password: A12345678a
+File 'Commands.txt' contains commands for Django shell (exercise purposes).
 
 Made for second practice exercise in chapter "Django and backend" for SkillFactory
 
